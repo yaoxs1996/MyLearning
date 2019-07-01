@@ -510,8 +510,8 @@ Java中没有虚函数的概念，普通函数就相当于C++的虚函数，动�
 * 接口支持多继承。
 
 **接口特性：**
-* 接口中的方法被隐式指定为public abstract。
-* 接口中可以有变量，但会被隐式指定为public static final变量。
+* 接口中的方法被 ___隐式指定___ 为`public abstract`。
+* 接口中可以有变量，但会被 ___隐式指定___ 为`public static final`变量。
 * 接口中的方法不能在接口中实现，只能由实现接口的类来实现接口中的方法。
 
 **抽象类和接口的区别：**
@@ -519,4 +519,135 @@ Java中没有虚函数的概念，普通函数就相当于C++的虚函数，动�
 * 抽象类的成员变量可以是各种类型，但接口的成员变量只能是public static final类型。
 * 接口中不能有静态代码块和静态方法。
 * 一个类只能继承一个抽象类，但一个类可以实现多个接口。
+
+### 接口的声明
+```java
+[可见度] interface 接口名称 [extends 其他接口名]
+{
+    //声明变量
+    //抽象方法
+}
+```
+### 接口的实现
+类实现接口的时候，必须实现接口中的所有方法。否则必须声明为抽象的类。  
+类使用`implements`关键字实现接口。  
+重写接口声明的方法时，注意一下规则：  
+* 不能抛出强制性异常。
+* 保持一致的方法名，保持相同或相兼容的返回值类型。
+* 抽象类没必要实现该接口的方法。
+
+实现接口注意的规则：  
+* 一个类可以同时实现多个接口。
+* 一个接口可以继承另一个接口。
+### 接口的继承
+使用`extends`关键字。   
+### 接口的多继承
+在Java中，接口允许多继承。  
+### 标记接口
+标记接口是没有任何方法和属性的接口。  
+使用标记接口的目的：  
+* 建立一个公共的父接口
+* 向一个类中添加数据类型
+### 总结
+___什么时候使用抽象类和接口___：  
+* 拥有一些方法，并想让它们中的一些有默认实现，则使用抽象类。
+* 如果想实现多重继承，必须使用接口。
+* 如果基本概念在不断改变，就需要使用抽象类。（否则更改功能就需要改变所有实现了该接口的类）
+
+---
+## Java包（package）
+更好地组织类，提供包机制，区别于类名的命名空间。  
+__包的作用__
+* 把功能相似或相关的类或接口组织在一个包中，方便类的查找和使用。
+* 包采用树形存储方式。
+* 包也限定了访问权限。
+```java
+package net.java.util;
+public class Something
+{
+    ...
+}
+```
+其路径应该是net/java/util/Something.java。  
+### 创建包
+包声明应该在源文件的第一行，每个源文件只能有一个包声明。  
+### import关键字
+使用`import`关键字导入包。  
+在源文件中，`import`语句应该在`package`语句之后，在所有的类的定义之前。  
+### package的目录结构
+
+---
+## Java数据结构
+### 枚举（Enumeration）
+### 位集合（BitSet）
+位结合类实现了一组可以单独设置和清除的位或标志。  
+### 向量（Vector）
+### 栈（Stack）
+### 字典（Dictionary）
+字典类是一个抽象类，定义了键映射到值的数据结构。  
+### 哈希表（Hashtable）
+### 属性（Properties）
+
+---
+## Java集合框架
+
+---
+## Java泛型
+泛型的本质是参数化类型。  
+### 泛型方法
+定义泛型方法的规则：  
+* 所有泛型方法声明都有一个类型参数声明部分，该类型参数声明部分在方法返回类型之前。
+* 类型参数只能代表引用型类型，不能是原始类型（int、double和char等）。  
+
+有界的类型参数（限制被允许传递到一个类型参数的类型种类范围）：  
+首先列出类型参数的名称，后跟`extends`关键字，最后紧跟它的上界。  
+### 泛型类
+在类名后面添加类型参数声明部分。  
+### 类型通配符
+
+---
+## Java序列化
+对象序列化机制，一个对象可以被表示为一个字节序列。  
+一个对象想要序列化成功，必须：  
+* 必须实现`java.io.Serializable`对象。
+* 所有属性必须是可序列化的。如果某个属性不是可序列化的，必须注明是短暂的`transient`（使属性不被序列化）。
+### 序列化对象
+`ObjectOutputStream`类来序列化一个对象。
+### 反序列化对象
+
+---
+## Java网络编程
+### Socket编程
+### ServerSocket类的方法
+`ServerSocket`类的四个构造方法：  
+1. `public ServerSocket(int port) throws IOException`
+创建绑定到特定端口的服务器套接字。
+2. `public ServerSocket(int port, int backlog) throws IOException`
+利用指定的backlog创建服务器套接字并将其绑定到指定的本地端口号。  
+3. `public ServerSocket(int port, int backlog, InetAddress address) throws IOException`
+使用指定的端口、侦听backlog和要绑定到的本地IP地址创建服务器。
+4. `public ServerSocket() throws IOException`
+创建非绑定服务器套接字
+
+`ServerSocket`类常用方法
+1. `public int getLocalPort()`
+返回此套接字在其上侦听的端口。
+2. `public Socket accept() thorws IOException`
+侦听并接受到此套接字的连接。
+3. `public void setSoTimeout(int timeout)`
+通过指定超时值启用/禁用SO_TIMEOUT，以毫秒为单位。
+4. `public void bind(SocketAddress host, int backlog)`
+将ServerSocket绑定到特定地址（IP地址和端口号）。
+### Socket类的方法
+`Socket`类有五个构造方法：
+1. `public Socket(String host, int port) throws UnknownHostException, IOException`
+2. `public Socket(InetAddress host, int port) throws IOException`
+3. `public Socket(String host, int port, InetAddress localAddress, int localPort) throws IOException`
+4. `public Socket(InetAddress host, int port, InetAddress localAddress, int localPort) throws IOException`
+5. `public Socket()`
+
+---
+## Java多线程编程
+### 线程的生命周期
+
 
