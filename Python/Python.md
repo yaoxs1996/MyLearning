@@ -359,7 +359,7 @@ class DerivedClassName(BaseClassName1):
 #### 类的私有属性
 `__private_attrs`，在类内部方法使用时`self.__private_attrs`。  
 #### 类的方法
-使用`def`关键字定义一个方法，类方法必须包含参数`self`，且为一个参数。
+使用`def`关键字定义一个方法，类方法必须包含参数`self`，且为第一个参数。
 #### 类的私有方法
 `__private_method`
 ### 运算符重载
@@ -369,3 +369,66 @@ class DerivedClassName(BaseClassName1):
 
 ---
 ## Python3 多线程
+### _thread模块
+```python {.line-numbers}
+import _thread
+import time
+
+def print_time(threadName, delay):
+    count = 0
+    while count<5:
+        time.sleep(delay)
+        count += 1
+        print("%s: %s" %(threadName, time.ctime(time.time())))
+
+try:
+    _thread.start_new_thread(print_time, ("Thread-1", 2,))
+    _thread.start_new_thread(print_time, ("Thread-2", 4,))
+except:
+    print("Error: Canot start thread")
+
+while 1:
+    pass
+```
+### 线程模块
+两个标准库`_thread`和`threading`提供对线程的支持。  
+提供`Thread`类来处理线程。  
+### 使用threading模块创建线程
+从`threadiing.Thread`继承创建一个新的子类，实例化后调用`start()`启动新线程，即调用线程的`run()`方法：  
+```python {.line-numbers}
+import threading
+import time
+
+exitFlag = 0
+
+class myThread(threading.Thread):
+    def __init__(self, threadID, name, counter):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.counter = counter
+    def run(self):
+        print("Begin thread: " + self.name)
+        print_time(self.name, self.counter, 5)
+        print("Quit thread: " + self.name)
+
+def print_time(threadName, delay, counter):
+    while counter:
+        if exitFlag:
+            threadName.exit()
+        time.sleep(delay)
+        print("%s: %s" %(threadName, time.ctime(time.time())))
+        counter -= 1
+
+thread1 = myThread(1, "Thread-1", 1)
+thread2 = myThread(2, "Thread-2", 2)
+
+thread1.start()
+thread2.start()
+thread1.join()
+thread2.join()
+print("Main thread quit")
+```
+### 线程同步
+使用`Thread`对象的`Lock`和`Rlock`都能实现简单的线程同步，两个对象都有`acquire`方法和`release`方法。  
+### 线程优先级队列
