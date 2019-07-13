@@ -390,4 +390,24 @@ esac
 
 ## Shell 输入/输出重定向
 
+| 命令 | 说明 |
+| --- | --- |
+| `command > file` | 将输出重定向到file |
+| `command < file` | 将输入重定向到file |
+| `command >> file` | 将输入以追加的形式重定向到file |
+| `n > file` | 将文件描述符为n的文件重定向到file |
+| `n >> file` | 将文件描述符为n的文件已追加的方式重定向到file |
+| `n >& m` | 将输出文件m和n合并 |
+| `n <& m` | 将输入文件m和n合并 |
+| `<< tag` | 将开始标记tag和结束标记tag之间的内容作为输入 |
 
+___文件描述符0通常是标准输入（STDIN），1是标准输出（STDOUT），2是标准错误输出（STDERR）。___  
+
+---
+
+## Shell 文件包含
+
+```sh
+. filename      #注意空格
+source filename
+```
