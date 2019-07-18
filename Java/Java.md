@@ -243,6 +243,27 @@ for(double element: myList)
 * 比较数组：equals方法。
 * 查找数组元素：binarySearch方法，二分查找。
 
+1. `Arrays.asList(T...data)`
+如果传入原生数据类型（int等），只返回第一个元素
+2. `Arrays.fill()`
+`Arrays.fill(Object[] array, Object obj)`  
+`Arrays.fill(Object[] array, int fromIndex, int toIndex, Object obj`  
+3. `Arrays.sort()`
+4. `Arrays.parallelSort()`并行排序，数据规模较大时，有更好性能
+5. `Arrays.binarySearch()`
+6. `Arrays.copyOf()`
+7. `Arrays.copyOfRange(T[] original, int from, int to)`
+8. `Arrays.equals(Object[] array1, Object[] array2)`
+9. `Arrays.deepEquals(Object[] array1, Object[] array2)`判断多维数组
+10. `Arrays.hashCode(Object[] array)`
+11. `Arrays.deepHashCode(Object[] array)`
+12. `Arrays.toString(Object[] array)`
+13. `Arrays.deepToString(Object[] array)`
+14. `Arrays.setAll()`
+15. `Arrays.parallelSetAll()`
+16. `Arrays.spliterator(T[] array)`
+17. `Arrays.stream(T[] array)`
+
 ***
 ## Java日期时间
 ### 获取当前日期时间
