@@ -12,7 +12,7 @@
 
 * JavaScript
     - [ ] Vue
-    - [ ] Element-UI
+    - [ ] ~~Element-UI~~ Ant Design
     - [ ] Electron
 * Java
     - [ ] 设计模式
